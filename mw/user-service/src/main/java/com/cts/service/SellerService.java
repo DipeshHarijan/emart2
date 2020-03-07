@@ -1,5 +1,7 @@
 package com.cts.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +12,26 @@ import com.cts.repository.SellerRepository;
 public class SellerService {
 	
 	@Autowired
-	SellerRepository sellerRepo;
-	
+	SellerRepository repo;
 
 	public void addSeller(Seller seller) {
-		sellerRepo.save(seller);
+		repo.save(seller);
 		
+	}
+
+	public void deleteUser(Long id) {
+		repo.deleteById(id);
+		
+	}
+
+	public void updateSeller(Seller seller) {
+		repo.save(seller);
+		
+	}
+
+	public Optional<Seller> getSellerById(Long sellerId) {
+		// TODO Auto-generated method stub
+		return repo.findById(sellerId);
 	}
 
 }

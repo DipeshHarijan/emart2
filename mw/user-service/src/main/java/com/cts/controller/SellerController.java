@@ -1,31 +1,44 @@
 package com.cts.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.entities.Seller;
-import com.cts.entities.User;
 import com.cts.service.SellerService;
-import com.cts.service.UserService;
 
 @RestController
 @RequestMapping(value = "/seller")
 public class SellerController {
-	
 
 	@Autowired
-	SellerService sellerService;
-	
-	@Autowired
-	UserService userService;
+	private SellerService service;
 
 	@RequestMapping(method = RequestMethod.POST, value = "/signup")
-	void addSeller(@RequestBody Seller seller) {
-		seller.setUser(new User("","","SELLER"));
-		sellerService.addSeller(seller);
+	void addBuyer(@RequestBody Seller seller) {
+		seller.setRole("SELLER");
+		seller.setUserName(seller.getEmail());
+		service.addSeller(seller);
+	}
+
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{userId}")
+	void deleteUserById(@PathVariable Long userId) {
+		service.deleteUser(userId);
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT)
+	void updateSeller(@RequestBody Seller seller) {
+		service.updateSeller(seller);
+	}
+	
+	@RequestMapping("/{userId}")
+	Optional<Seller> getSellerById(@PathVariable Long sellerId) {
+		return service.getSellerById(sellerId);
 	}
 
 }

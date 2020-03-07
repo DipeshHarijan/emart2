@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.cts.entities.Buyer;
 
 @Repository
-public interface BuyerRepository extends CrudRepository<Buyer, Integer> {
+public interface BuyerRepository extends CrudRepository<Buyer, Long> {
 
 }

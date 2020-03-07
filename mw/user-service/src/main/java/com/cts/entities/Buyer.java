@@ -1,26 +1,36 @@
 package com.cts.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity(name = "Buyers")
-public class Buyer {
+public class Buyer extends User {
 
-	@OneToOne
-	private User user;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int buyerId;
+	private String firstName;
+	private String lastName;
+	@Column(unique = true)
 	private String emailId;
 	private String mobileNumber;
 	@Embedded
 	private Address address;
 	private String createdDate;
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
 	public String getEmailId() {
 		return emailId;
@@ -54,31 +64,19 @@ public class Buyer {
 		this.createdDate = createdDate;
 	}
 
-	public int getBuyerId() {
-		return buyerId;
-	}
-
-	public void setBuyerId(int buyerId) {
-		this.buyerId = buyerId;
-	}
-
-	public Buyer(User user, int buyerId, String emailId, String mobileNumber, Address address, String createdDate) {
-		super();
-		this.user = user;
-		this.buyerId = buyerId;
+	public Buyer(Long userId, String userName, String password, String role, String firstName, String lastName,
+			String emailId, String mobileNumber, Address address, String createdDate) {
+		super(userId, userName, password, role);
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.emailId = emailId;
 		this.mobileNumber = mobileNumber;
 		this.address = address;
 		this.createdDate = createdDate;
 	}
 
-	public User getUser() {
-		return user;
+	public Buyer() {
+		super();
 	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 
 }

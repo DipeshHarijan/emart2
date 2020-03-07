@@ -3,8 +3,9 @@ package com.cts.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.cts.entities.Seller;
+import com.cts.entities.Category;
 
 @Repository
-public interface SellerRepository extends CrudRepository<Seller, Long> {
+public interface CategoryRepository extends CrudRepository<Category, Long> {
+
 }
