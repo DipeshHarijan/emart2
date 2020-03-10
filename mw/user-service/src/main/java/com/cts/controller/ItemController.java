@@ -31,7 +31,8 @@ public class ItemController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/add")
-	void addItem(@RequestBody Item item) {
+	void addItem(@RequestBody Item item, @PathVariable Long userId, @PathVariable Long subCategoryId, @PathVariable Long discountId) {
+		item.sel
 		service.addItem(item);
 	}
 
